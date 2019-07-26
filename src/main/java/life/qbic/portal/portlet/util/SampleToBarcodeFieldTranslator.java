@@ -27,7 +27,7 @@ import com.vaadin.ui.ComboBox;
 public class SampleToBarcodeFieldTranslator {
 
   private static final Logger LOG = LogManager.getLogger(SampleToBarcodeFieldTranslator.class);
-  private final int HEADER_MAX_LENTH = 15; // cutoff value of the ID line printed on tube barcode stickers
+  private final int HEADER_MAX_LENTH = 21; // cutoff value of the ID line printed on tube barcode stickers //changed by CFH 15 -> 21
   private final int INFO_MAX_LENGTH = 21; // cutoff value of the two description lines printed on tube barcode stickers
 
   public String buildInfo(ComboBox select, Sample s, String parents, boolean cut) {

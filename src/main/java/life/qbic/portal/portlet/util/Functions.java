@@ -56,15 +56,15 @@ public class Functions {
   }
 
   public static int compareSampleCodes(String c1, String c2) {
-    if (!c1.startsWith("Q") || c1.contains("ENTITY") || !c2.startsWith("Q")
+    if (!c1.startsWith("2") || c1.contains("ENTITY") || !c2.startsWith("2") //changed by CFH
         || c2.contains("ENTITY"))
       return c1.compareTo(c2);
     try {
       // compares sample codes by projects, ending letters (999A --> 001B) and numbers (001A -->
       // 002A)
-      int projCompare = c1.substring(0, 5).compareTo(c2.substring(0, 5));
-      int numCompare = c1.substring(5, 8).compareTo(c2.substring(5, 8));
-      int letterCompare = c1.substring(8, 9).compareTo(c2.substring(8, 9));
+      int projCompare = c1.substring(0, 15).compareTo(c2.substring(0, 15)); //changed by CFH 5 -> 15
+      int numCompare = c1.substring(16, 19).compareTo(c2.substring(16, 19)); //5->16, 8->19
+      int letterCompare = c1.substring(19, 20).compareTo(c2.substring(8, 9)); //8, 9 -> 19, 20
       if (projCompare != 0)
         return projCompare;
       else {
@@ -127,15 +127,17 @@ public class Functions {
    * @return a new sample code
    */
   public static String incrementSampleCode(String code) {
-    String old = code.substring(5, 8);
+   // String old = code.substring(5, 8); 
+	String old = code.substring(16, 19);
     String num;
     int newNum = Integer.parseInt(old) + 1;
-    char letter = code.charAt(8);
+    //char letter = code.charAt(8);
+    char letter = code.charAt(19);
     if (newNum > 999) {
       num = "001" + incrementUppercase(letter);
     } else
       num = createCountString(newNum, 3) + letter;
-    String res = code.substring(0, 5) + num;
+    String res = code.substring(0, 16) + num; // changed by CFH
 
     return res + checksum(res);
   }
@@ -237,7 +239,8 @@ public class Functions {
    * @return true if String is a QBiC barcode, false if not
    */
   public static boolean isQbicBarcode(String code) {
-    String pattern = "Q[A-Z0-9]{4}[0-9]{3}[A-Z0-9]{2}";
+    //String pattern = "Q[A-Z0-9]{4}[0-9]{3}[A-Z0-9]{2}"; //changed by CFH
+	String pattern = "20[0-9]{2}-[1-4]-[0-9]{4}-[0-9]{3}-[0-9]{3}[A-X0-9]{2}";
     return code.matches(pattern);
   }
 
@@ -249,9 +252,9 @@ public class Functions {
    */
   public static String getProjectPrefix(String sample) {
     if (isInteger("" + sample.charAt(4)))
-      return sample.substring(0, 4);
+      return sample.substring(0, 15); //changed by CFH
     else
-      return sample.substring(0, 5);
+      return sample.substring(0, 15); //Changed by CFH
   }
 
   public static boolean isMeasurementOfBarcode(String code, String type) {

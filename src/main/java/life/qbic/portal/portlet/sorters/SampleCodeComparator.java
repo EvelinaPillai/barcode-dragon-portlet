@@ -42,15 +42,15 @@ public class SampleCodeComparator implements Comparator<IBarcodeBean> {
   public int compare(IBarcodeBean o1, IBarcodeBean o2) {
     String c1 = o1.getCode();
     String c2 = o2.getCode();
-    if (!c1.startsWith("Q") || c1.contains("ENTITY") || !c2.startsWith("Q")
+    if (!c1.startsWith("2") || c1.contains("ENTITY") || !c2.startsWith("2") //changed by CFH starts with "Q" to starts with "2"
         || c2.contains("ENTITY"))
       return o1.getCode().compareTo(o2.getCode());
     try {
       // compares sample codes by projects, ending letters (999A --> 001B) and numbers (001A -->
       // 002A)
-      int projCompare = c1.substring(0, 5).compareTo(c2.substring(0, 5));
-      int numCompare = c1.substring(5, 8).compareTo(c2.substring(5, 8));
-      int letterCompare = c1.substring(8, 9).compareTo(c2.substring(8, 9));
+      int projCompare = c1.substring(0, 16).compareTo(c2.substring(0, 16)); //changed by CFH  from (0, 5) to (0, 16)
+      int numCompare = c1.substring(16, 19).compareTo(c2.substring(16, 19)); // 5 to 8 was original values
+      int letterCompare = c1.substring(19, 20).compareTo(c2.substring(19, 20)); //8 , 9 original values
       if (projCompare != 0)
         return projCompare;
       else {

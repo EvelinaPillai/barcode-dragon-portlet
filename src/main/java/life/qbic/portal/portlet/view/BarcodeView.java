@@ -73,7 +73,7 @@ public class BarcodeView extends HorizontalLayout {
   private boolean isAdmin;
 
   private List<String> barcodeSamples = new ArrayList<>(Arrays.asList("Q_BIOLOGICAL_SAMPLE",
-      "Q_TEST_SAMPLE", "Q_NGS_SINGLE_SAMPLE_RUN", "Q_MHC_LIGAND_EXTRACT"));
+      "Q_TEST_SAMPLE", "Q_NGS_SINGLE_SAMPLE_RUN", "Q_MHC_LIGAND_EXTRACT", "Q_CFH_ELEMENTS", "Q_CHF_NMINS"));
 
   /**
    * Creates a new component view for barcode creation

@@ -87,12 +87,13 @@ public class BarcodeController implements Observer {
   List<IBarcodeBean> barcodeBeans;
 
   private static final Logger LOG = LogManager.getLogger(BarcodeController.class);
-
+  
   private List<String> barcodeExperiments =
       new ArrayList<>(Arrays.asList("Q_SAMPLE_EXTRACTION", "Q_SAMPLE_PREPARATION",
-          "Q_NGS_MEASUREMENT", "Q_MHC_LIGAND_EXTRACTION", "Q_MS_MEASUREMENT"));
+          "Q_NGS_MEASUREMENT", "Q_MHC_LIGAND_EXTRACTION", "Q_MS_MEASUREMENT", "Q_CFH_ELEMENT", "Q_CFH_NMIN", //changed by CFH
+          "Q_CFH_AA", "Q_CFH_FAT"));
   private List<String> barcodeSamples = new ArrayList<>(Arrays.asList("Q_BIOLOGICAL_SAMPLE",
-      "Q_TEST_SAMPLE", "Q_NGS_SINGLE_SAMPLE_RUN", "Q_MHC_LIGAND_EXTRACT", "Q_MS_RUN"));
+      "Q_TEST_SAMPLE", "Q_NGS_SINGLE_SAMPLE_RUN", "Q_MHC_LIGAND_EXTRACT", "Q_MS_RUN", "Q_CFH_ELEMENTS", "Q_CFH_NMINS"));//changed by CFH
   // mapping between sample type and interesting property of that sample type has to be added here
   private Map<String, String> sampleTypeToBioTypeField = new HashMap<String, String>() {
     {
@@ -101,6 +102,8 @@ public class BarcodeController implements Observer {
       put("Q_NGS_SINGLE_SAMPLE_RUN", "");
       put("Q_MHC_LIGAND_EXTRACT", "Q_MHC_CLASS");
       put("Q_MS_RUN", "");
+      put("Q_CFH_ELEMENTS", "Q_CFH_DIGESTION" + " " + "Q_ELEMENT_DESC" + " " + "Q_CFH_DEVICES");//changed by CFH see if necessary
+      put("Q_CFH_NMINS", "Q_CFH_NMIN_DEPTH" + " " + "Q_CFH_NMIN_DENSITY" + "Q_CFH_NITRATE");
     }
   };
 
@@ -354,6 +357,10 @@ public class BarcodeController implements Observer {
           // ms run
           else if (type.equals(barcodeSamples.get(4)))
             bioType = "Wash Runs";
+          else if (type.equals(barcodeSamples.get(5)))
+        	  bioType = "ELEMENT ANALYSIS";
+          else if (type.equals(barcodeSamples.get(6)))
+        	  bioType = "NMIN ANALYSIS";
           ExperimentBarcodeSummary b = new ExperimentBarcodeSummary(bioType, "1", expName, dt);
           b.addSample(s);
           experiments.put(tpl, b);

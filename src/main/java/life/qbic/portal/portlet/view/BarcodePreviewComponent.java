@@ -50,7 +50,7 @@ public class BarcodePreviewComponent extends VerticalLayout {
   TextField info1;
   TextField info2;
   TextField person;
-  TextField qbicInfo = new TextField("", "www.qbic.life");
+  TextField qbicInfo = new TextField("", "portal.cfh.uni.hohenheim.de"); // changed by CFH
   // qbicInfo = new TextField("", "QBiC: +4970712972163");
   private OptionGroup codedName;
   private ComboBox select1;
@@ -85,7 +85,7 @@ public class BarcodePreviewComponent extends VerticalLayout {
     codedName.select("QBiC ID");
 
     code.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-    code.setWidth("200px");
+    code.setWidth("250px");
     code.addStyleName("barcode-large");
 
     styleInfoField(info1);

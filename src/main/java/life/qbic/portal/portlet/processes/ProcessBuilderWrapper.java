@@ -17,7 +17,7 @@ public class ProcessBuilderWrapper {
     private int status;
  
     public ProcessBuilderWrapper(File directory, List<String> command, String path) throws Exception {
-        infos = new StringWriter();
+    	infos = new StringWriter();
         errors = new StringWriter();
         ProcessBuilder pb = new ProcessBuilder(command);
         if(path != null) pb.environment().put("PATH", path);

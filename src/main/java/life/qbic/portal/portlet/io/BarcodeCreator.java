@@ -71,7 +71,7 @@ public class BarcodeCreator {
      * @return True, if the barcode already exists on the server, false otherwise
      */
     public boolean barcodeExists(String filename, FileType type) {
-        String project = filename.substring(0, 5);
+        String project = filename.substring(0, 15); //changed by CFH from 5 to 15
         String t = type.toString().toLowerCase();
         String base = config.getResultsFolder() + "/" + project + "/";
         return new File(base + t + "/" + filename + "." + t).isFile();
@@ -166,7 +166,8 @@ public class BarcodeCreator {
      */
     public void findOrCreateTubeBarcodesWithProgress(List<IBarcodeBean> samps, final ProgressBar bar,
                                                      final Label info, final Runnable ready) {
-        final String projectPath = config.getResultsFolder() + samps.get(0).getCode().substring(0, 5);
+    	String projectCode = samps.get(0).getCode().substring(0, 15);
+        final String projectPath = config.getResultsFolder() + samps.get(0).getCode().substring(0, 15); //changed from CFH from (0, 5) to (0, 15)
         Date date = new java.util.Date();
         String timeStamp =
                 new Timestamp(date.getTime()).toString().split(" ")[1].replace(":", "").replace(".", "");
@@ -277,7 +278,7 @@ public class BarcodeCreator {
         String[] time = calendar.getTime().toString().split(" ");
         String date = time[5] + time[1] + time[2];
 
-        String project = samps.get(0).getCode().substring(0, 5);
+        String project = samps.get(0).getCode().substring(0, 15); //changed by CFH from (0, 5) to (0, 15) 
 
         List<String> cmd = new ArrayList<String>();
         cmd.add(PYTHON);
@@ -319,7 +320,7 @@ public class BarcodeCreator {
         List<String> cmd = new ArrayList<>();
 
         // programs and paths
-        String project = samps.get(0).getCode().substring(0, 5);
+        String project = samps.get(0).getCode().substring(0, 15); //changed by CFH from 5 to 15 
         String barcodePath = config.getResultsFolder() + project + "/pdf/";
         final String dlPath = barcodePath + project + "_barcodes.zip";
         new File(dlPath).delete();
